@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html ng-app="paiFrontend">
+<head>
+  <title>PAI APP1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="utf-8">
+  <link href="app.less" type="text/css" rel="stylesheet/less">
+</head>
+<body ng-controller="MainController">
+
+  <!-- Livereload script for development only (stripped during dist build) -->
+  <script src="http://localhost:35729/livereload.js" data-concat="false"></script>
+
+  <!-- JS from Bower Components -->
+  <script src="bower_components/less.js/dist/less-1.6.2.js" data-concat="false"></script>
+  <script src="bower_components/jquery/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/underscore/underscore.js"></script>
+  <script src="bower_components/moment/moment.js"></script>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+  <script src="bower_components/angular-animate/angular-animate.js"></script>
+  <script src="bower_components/angular-resource/angular-resource.js"></script>
+  <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+  <script src="bower_components/angular-ui-utils/ui-utils.js"></script>
+  <script src="bower_components/restangular/dist/restangular.js"></script>
+  <!-- Add New Bower Component JS Above -->
+
+
+  <!-- Main App JS -->
+  <script src="app.js"></script>
+  <!-- Add New Component JS Above -->
+
+  <div>
+    <div id="content" class="container">
+        <div class="row">
+            <h1>Spedycja sp. z o.o.
+                <small ng-if="currentDepartment.name=='main'">centrala</small>
+                <small ng-if="currentDepartment.name!='main'">oddział {{currentDepartment.name}}</small>
+            </h1>
+
+        </div>
+      <div class="row">
+          <h2>Deliverymen</h2>
+          <table class="table-condensed table-bordered table-hover">
+              <tr ng-repeat="deliveryman in deliverymen">
+                  <td>{{ deliveryman.id }}</td>
+                  <td>{{ deliveryman.name }}</td>
+                  <td>{{ deliveryman.surname }}</td>
+                  <td>{{ deliveryman.email }}</td>
+                  <td>
+                      <button type="button" class="btn btn-danger" ng-click="removeDeliveryman(deliveryman)">
+                          <i class="fa fa-trash-o"></i>
+                      </button>
+                  </td>
+              </tr>
+              <tr class="active create-new-row">
+                  <td>
+                      <label for="newDeliveryman-id">ID</label>
+                      <input type="text" ng-model="newDeliveryman.id" id="newDeliveryman-id" /></td>
+                  <td>
+                      <label for="newDeliveryman-name">Name</label>
+                      <input type="text" ng-model="newDeliveryman.name" id="newDeliveryman-name" /></td>
+                  <td>
+                      <label for="newDeliveryman-surname">Surname</label>
+                      <input type="text" ng-model="newDeliveryman.surname" id="newDeliveryman-surname" /></td>
+                  <td>
+                      <label for="newDeliveryman-email">Email</label>
+                      <input type="text" ng-model="newDeliveryman.email" id="newDeliveryman-email" /></td>
+                  <td>
+                      <button type="button" ng-click="addDeliveryman(newDeliveryman)"><i class="fa fa-plus"></i> Add</button>
+                  </td>
+              </tr>
+          </table>
+        <div ui-view>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
